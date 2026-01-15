@@ -24,14 +24,8 @@ else:
         "Upload a document (.txt or .md)", type=("txt", "md")
     )
 
-    # Ask the user for a question via `st.text_area`.
-    question = st.text_area(
-        "Now ask a question about the document!",
-        placeholder="Can you give me a short summary?",
-        disabled=not uploaded_file,
-    )
 
-    if uploaded_file and question:
+    if uploaded_file:
 
         # Process the uploaded file and question.
         document = uploaded_file.read().decode()
@@ -44,7 +38,7 @@ else:
 
         # Generate an answer using the OpenAI API.
         stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-5-chat-latest",
             messages=messages,
             stream=True,
         )
